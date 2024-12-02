@@ -2,29 +2,46 @@ package config
 
 import (
 	"errors"
+
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	SnmpCfg    SnmpConfig
-	RedisCfg   RedisConfig
-	OltCfg     OltConfig
-	Board1Pon1 Board1Pon1
-	Board1Pon2 Board1Pon2
-	Board1Pon3 Board1Pon3
-	Board1Pon4 Board1Pon4
-	Board1Pon5 Board1Pon5
-	Board1Pon6 Board1Pon6
-	Board1Pon7 Board1Pon7
-	Board1Pon8 Board1Pon8
-	Board2Pon1 Board2Pon1
-	Board2Pon2 Board2Pon2
-	Board2Pon3 Board2Pon3
-	Board2Pon4 Board2Pon4
-	Board2Pon5 Board2Pon5
-	Board2Pon6 Board2Pon6
-	Board2Pon7 Board2Pon7
-	Board2Pon8 Board2Pon8
+	SnmpCfg     SnmpConfig
+	RedisCfg    RedisConfig
+	OltCfg      OltConfig
+	Board1Pon1  Board1Pon1
+	Board1Pon2  Board1Pon2
+	Board1Pon3  Board1Pon3
+	Board1Pon4  Board1Pon4
+	Board1Pon5  Board1Pon5
+	Board1Pon6  Board1Pon6
+	Board1Pon7  Board1Pon7
+	Board1Pon8  Board1Pon8
+	Board1Pon9  Board1Pon9
+	Board1Pon10 Board1Pon10
+	Board1Pon11 Board1Pon11
+	Board1Pon12 Board1Pon12
+	Board1Pon13 Board1Pon13
+	Board1Pon14 Board1Pon14
+	Board1Pon15 Board1Pon15
+	Board1Pon16 Board1Pon16
+	Board2Pon1  Board2Pon1
+	Board2Pon2  Board2Pon2
+	Board2Pon3  Board2Pon3
+	Board2Pon4  Board2Pon4
+	Board2Pon5  Board2Pon5
+	Board2Pon6  Board2Pon6
+	Board2Pon7  Board2Pon7
+	Board2Pon8  Board2Pon8
+	Board2Pon9  Board2Pon9
+	Board2Pon10 Board2Pon10
+	Board2Pon11 Board2Pon11
+	Board2Pon12 Board2Pon12
+	Board2Pon13 Board2Pon13
+	Board2Pon14 Board2Pon14
+	Board2Pon15 Board2Pon15
+	Board2Pon16 Board2Pon16
 }
 
 type SnmpConfig struct {
@@ -171,6 +188,125 @@ type Board1Pon8 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+type Board1Pon9 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon10 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon11 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon12 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon13 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon14 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon15 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board1Pon16 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
 type Board2Pon1 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -277,6 +413,126 @@ type Board2Pon7 struct {
 }
 
 type Board2Pon8 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon9 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon10 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon11 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon12 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon13 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon14 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon15 struct {
+	OnuIDNameOID              string `mapstructure:"onu_id_name"`
+	OnuTypeOID                string `mapstructure:"onu_type"`
+	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`
+	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
+	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
+	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
+	OnuDescriptionOID         string `mapstructure:"onu_description"`
+	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
+	OnuLastOfflineOID         string `mapstructure:"onu_last_offline_time"`
+	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
+	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
+}
+
+type Board2Pon16 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
 	OnuSerialNumberOID        string `mapstructure:"onu_serial_number"`

@@ -2,13 +2,14 @@ package handler
 
 import (
 	"fmt"
+	"net/http"
+	"strconv"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/usecase"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/utils"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/pkg/pagination"
 	"github.com/rs/zerolog/log"
-	"net/http"
-	"strconv"
 )
 
 type OnuHandlerInterface interface {
@@ -47,9 +48,9 @@ func (o *OnuHandler) GetByBoardIDAndPonID(w http.ResponseWriter, r *http.Request
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
@@ -116,9 +117,9 @@ func (o *OnuHandler) GetByBoardIDPonIDAndOnuID(w http.ResponseWriter, r *http.Re
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
@@ -183,9 +184,9 @@ func (o *OnuHandler) GetEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
@@ -229,9 +230,9 @@ func (o *OnuHandler) GetOnuIDAndSerialNumber(w http.ResponseWriter, r *http.Requ
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
@@ -274,9 +275,9 @@ func (o *OnuHandler) UpdateEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
@@ -323,9 +324,9 @@ func (o *OnuHandler) GetByBoardIDAndPonIDWithPaginate(w http.ResponseWriter, r *
 	ponIDInt, err := strconv.Atoi(ponID) // convert string to int
 
 	// Validate ponIDInt value and return error 400 if ponIDInt is not between 1 and 8
-	if err != nil || ponIDInt < 1 || ponIDInt > 8 {
+	if err != nil || ponIDInt < 1 || ponIDInt > 16 {
 		log.Error().Err(err).Msg("Invalid 'pon_id' parameter")
-		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 8")) // error 400
+		utils.ErrorBadRequest(w, fmt.Errorf("invalid 'pon_id' parameter. It must be between 1 and 16")) // error 400
 		return
 	}
 
