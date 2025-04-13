@@ -85,7 +85,7 @@ func (a *App) Start(ctx context.Context) error {
 	}()
 
 	// Initialize repository
-	snmpRepo := repository.NewPonRepository(snmpConn)
+	snmpRepo := repository.NewPonRepository(snmpConn.Target, snmpConn.Community, snmpConn.Port)
 	redisRepo := repository.NewOnuRedisRepo(redisClient)
 
 	// Initialize usecase
