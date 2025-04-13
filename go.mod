@@ -1,6 +1,8 @@
 module github.com/megadata-dev/go-snmp-olt-zte-c320
 
-go 1.19
+go 1.23.0
+
+toolchain go1.24.1
 
 require (
 	github.com/go-chi/chi/v5 v5.0.10
@@ -11,6 +13,7 @@ require (
 	github.com/rs/zerolog v1.31.0
 	github.com/spf13/viper v1.17.0
 	github.com/stretchr/testify v1.8.4
+	golang.org/x/sync v0.13.0
 )
 
 require (

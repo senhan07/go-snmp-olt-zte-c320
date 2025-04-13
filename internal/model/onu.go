@@ -75,3 +75,8 @@ type OnuSerialNumber struct {
 	ID           int    `json:"onu_id"`
 	SerialNumber string `json:"serial_number"`
 }
+
+type PaginationResult struct {
+	OnuInformationList []ONUInfoPerBoard
+	Count              int
+}
