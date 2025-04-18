@@ -17,7 +17,7 @@ func Shutdown(ctx context.Context, server *http.Server) error {
 
 	go func() {
 		err := server.ListenAndServe()
-		if err != nil && !errors.Is(http.ErrServerClosed, err) {
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
 			ch <- fmt.Errorf("failed to start server: %v", err)
 		}
 		close(ch)
