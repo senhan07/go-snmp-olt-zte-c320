@@ -1,13 +1,14 @@
 package app
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/handler"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/middleware"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"net/http"
-	"os"
 )
 
 func loadRoutes(onuHandler *handler.OnuHandler) http.Handler {

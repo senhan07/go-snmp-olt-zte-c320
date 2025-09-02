@@ -2,12 +2,13 @@ package snmp
 
 import (
 	"fmt"
-	"github.com/gosnmp/gosnmp"
-	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
-	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/utils"
 	"log"
 	"os"
 	"time"
+
+	"github.com/gosnmp/gosnmp"
+	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
+	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/utils"
 )
 
 var (
@@ -28,7 +29,7 @@ func SetupSnmpConnection(config *config.Config) (*gosnmp.GoSNMP, error) {
 		snmpCommunity = os.Getenv("SNMP_COMMUNITY")
 		logSnmp = gosnmp.Logger{}
 	} else {
-		snmpHost = config.SnmpCfg.Ip
+		snmpHost = config.SnmpCfg.IP
 		snmpPort = config.SnmpCfg.Port
 		snmpCommunity = config.SnmpCfg.Community
 		logSnmp = gosnmp.NewLogger(log.New(os.Stdout, "", 0))

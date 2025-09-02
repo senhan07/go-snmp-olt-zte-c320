@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"net"
 	"time"
 
 	"github.com/gosnmp/gosnmp"
@@ -53,7 +54,12 @@ func (r *snmpRepository) Get(oids []string) (*gosnmp.SnmpPacket, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer snmp.Conn.Close()
+	defer func(Conn net.Conn) {
+		err := Conn.Close()
+		if err != nil {
+			fmt.Printf("Error closing SNMP connection: %v\n", err)
+		}
+	}(snmp.Conn)
 
 	result, err := snmp.Get(oids)
 	if err != nil {
@@ -68,7 +74,12 @@ func (r *snmpRepository) Walk(oid string, walkFunc func(pdu gosnmp.SnmpPDU) erro
 	if err != nil {
 		return err
 	}
-	defer snmp.Conn.Close()
+	defer func(Conn net.Conn) {
+		err := Conn.Close()
+		if err != nil {
+			fmt.Printf("Error closing SNMP connection: %v\n", err)
+		}
+	}(snmp.Conn)
 
 	err = snmp.Walk(oid, walkFunc)
 	if err != nil {

@@ -1,5 +1,6 @@
 package model
 
+// OltConfig struct is a struct that represent the OLT configuration
 type OltConfig struct {
 	BaseOID                   string
 	OnuIDNameOID              string
@@ -16,11 +17,13 @@ type OltConfig struct {
 	OnuGponOpticalDistanceOID string
 }
 
+// ONUInfo struct is a struct that represent the ONU information
 type ONUInfo struct {
 	ID   string `json:"onu_id"`
 	Name string `json:"name"`
 }
 
+// ONUInfoPerBoard struct is a struct that represent the ONU information per board
 type ONUInfoPerBoard struct {
 	Board        int    `json:"board"`
 	PON          int    `json:"pon"`
@@ -32,6 +35,7 @@ type ONUInfoPerBoard struct {
 	Status       string `json:"status"`
 }
 
+// ONUCustomerInfo struct is a struct that represent the detailed ONU information for customer
 type ONUCustomerInfo struct {
 	Board                int    `json:"board"`
 	PON                  int    `json:"pon"`
@@ -52,16 +56,19 @@ type ONUCustomerInfo struct {
 	GponOpticalDistance  string `json:"gpon_optical_distance"`
 }
 
+// OnuID struct is a struct that represent the ONU ID
 type OnuID struct {
 	Board int `json:"board"`
 	PON   int `json:"pon"`
 	ID    int `json:"onu_id"`
 }
 
+// OnuOnlyID struct is a struct that represent only the ONU ID without board and PON
 type OnuOnlyID struct {
 	ID int `json:"onu_id"`
 }
 
+// SNMPWalkTask struct is a struct that represent the SNMP walk task
 type SNMPWalkTask struct {
 	BaseOID   string
 	TargetOID string
@@ -69,6 +76,7 @@ type SNMPWalkTask struct {
 	PON       int
 }
 
+// OnuSerialNumber struct is a struct that represent the ONU serial number
 type OnuSerialNumber struct {
 	Board        int    `json:"board"`
 	PON          int    `json:"pon"`
@@ -76,6 +84,7 @@ type OnuSerialNumber struct {
 	SerialNumber string `json:"serial_number"`
 }
 
+// PaginationResult struct is a struct that represent the pagination result
 type PaginationResult struct {
 	OnuInformationList []ONUInfoPerBoard
 	Count              int

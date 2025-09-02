@@ -3,32 +3,32 @@ package utils
 import (
 	"encoding/json"
 	"errors"
-	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/model"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/model"
 )
 
 func TestSendJSONResponse(t *testing.T) {
-	// Inisialisasi ResponseWriter dan Request
+	// Initiate ResponseWriter dan Request
 	rr := httptest.NewRecorder()
 
-	// Contoh respons yang ingin Anda kirim
 	response := model.OnuID{
 		Board: 2,
 		PON:   8,
 		ID:    1,
 	}
 
-	// Panggil fungsi SendJSONResponse
+	// Call the SendJSONResponse function
 	SendJSONResponse(rr, http.StatusOK, response)
 
-	// Periksa kode status respons
+	// Check the status code
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("Status code tidak sesuai: got %v want %v", status, http.StatusOK)
 	}
 
-	// Periksa tipe konten
+	// Check the content type
 	expectedContentType := "application/json"
 	if contentType := rr.Header().Get("Content-Type"); contentType != expectedContentType {
 		t.Errorf("Content-Type tidak sesuai: got %v want %v", contentType, expectedContentType)

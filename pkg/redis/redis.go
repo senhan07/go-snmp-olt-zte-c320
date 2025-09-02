@@ -1,11 +1,12 @@
 package redis
 
 import (
+	"os"
+	"time"
+
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/utils"
 	"github.com/redis/go-redis/v9"
-	"os"
-	"time"
 )
 
 var (
@@ -18,6 +19,7 @@ var (
 	redisPoolTimeout        int
 )
 
+// NewRedisClient creates and returns a new Redis client based on the provided configuration.
 func NewRedisClient(cfg *config.Config) *redis.Client {
 	if os.Getenv("APP_ENV") == "development" || os.Getenv("APP_ENV") == "production" {
 		redisHost = os.Getenv("REDIS_HOST")

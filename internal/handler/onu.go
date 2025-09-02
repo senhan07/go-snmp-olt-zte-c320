@@ -12,6 +12,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// OnuHandlerInterface is an interface that represent the auth's handler contract
 type OnuHandlerInterface interface {
 	GetByBoardIDAndPonID(w http.ResponseWriter, r *http.Request)
 	GetByBoardIDPonIDAndOnuID(w http.ResponseWriter, r *http.Request)
@@ -21,14 +22,18 @@ type OnuHandlerInterface interface {
 	GetByBoardIDAndPonIDWithPaginate(w http.ResponseWriter, r *http.Request)
 }
 
+// OnuHandler is a struct that represent the auth handler
 type OnuHandler struct {
 	ponUsecase usecase.OnuUseCaseInterface
 }
 
+// NewOnuHandler will create an object that represent the auth handler
 func NewOnuHandler(ponUsecase usecase.OnuUseCaseInterface) *OnuHandler {
 	return &OnuHandler{ponUsecase: ponUsecase}
 }
 
+// GetByBoardIDAndPonID is a method to get onu info by board id and pon id
+// example: http://localhost:8080/board/1/pon/1
 func (o *OnuHandler) GetByBoardIDAndPonID(w http.ResponseWriter, r *http.Request) {
 
 	boardID := chi.URLParam(r, "board_id") // 1 or 2
@@ -97,6 +102,8 @@ func (o *OnuHandler) GetByBoardIDAndPonID(w http.ResponseWriter, r *http.Request
 
 }
 
+// GetByBoardIDPonIDAndOnuID is a method to get onu info by board id, pon id, and onu id
+// example: http://localhost:8080/board/1/pon/1/onu
 func (o *OnuHandler) GetByBoardIDPonIDAndOnuID(w http.ResponseWriter, r *http.Request) {
 
 	boardID := chi.URLParam(r, "board_id") // 1 or 2
@@ -165,6 +172,8 @@ func (o *OnuHandler) GetByBoardIDPonIDAndOnuID(w http.ResponseWriter, r *http.Re
 	utils.SendJSONResponse(w, http.StatusOK, response) // 200
 }
 
+// GetEmptyOnuID is a method to get empty onu id by board id and pon id
+// example: http://localhost:8080/board/1/pon/1/empty
 func (o *OnuHandler) GetEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 
 	boardID := chi.URLParam(r, "board_id") // 1 or 2
@@ -211,6 +220,8 @@ func (o *OnuHandler) GetEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSONResponse(w, http.StatusOK, response) // 200
 }
 
+// GetOnuIDAndSerialNumber is a method to get onu id and serial number by board id and pon id
+// example: http://localhost:8080/board/1/pon/1/serial
 func (o *OnuHandler) GetOnuIDAndSerialNumber(w http.ResponseWriter, r *http.Request) {
 
 	boardID := chi.URLParam(r, "board_id") // 1 or 2
@@ -257,6 +268,8 @@ func (o *OnuHandler) GetOnuIDAndSerialNumber(w http.ResponseWriter, r *http.Requ
 	utils.SendJSONResponse(w, http.StatusOK, response) // 200
 }
 
+// UpdateEmptyOnuID is a method to update empty onu id by board id and pon id
+// example: http://localhost:8080/board/1/pon/1/empty
 func (o *OnuHandler) UpdateEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 	boardID := chi.URLParam(r, "board_id") // 1 or 2
 	ponID := chi.URLParam(r, "pon_id")     // 1 - 8
@@ -302,6 +315,8 @@ func (o *OnuHandler) UpdateEmptyOnuID(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSONResponse(w, http.StatusOK, response) // 200
 }
 
+// GetByBoardIDAndPonIDWithPaginate is a method to get onu info by board id and pon id with pagination
+// example: http://localhost:8080/board/1/pon/1/paginate?page=1&page_size=10
 func (o *OnuHandler) GetByBoardIDAndPonIDWithPaginate(w http.ResponseWriter, r *http.Request) {
 
 	boardID := chi.URLParam(r, "board_id") // 1 or 2

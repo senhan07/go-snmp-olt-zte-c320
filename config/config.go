@@ -6,6 +6,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Config represents the main application configuration structure
+// that contains all sub-configurations for SNMP, Redis, OLT, and individual PON boards.
 type Config struct {
 	SnmpCfg     SnmpConfig
 	RedisCfg    RedisConfig
@@ -44,12 +46,16 @@ type Config struct {
 	Board2Pon16 Board2Pon16
 }
 
+// SnmpConfig contains configuration parameters for SNMP connection
+// including target IP address, port, and community string.
 type SnmpConfig struct {
-	Ip        string `mapstructure:"ip"`
+	IP        string `mapstructure:"ip"` // Target IP address of the SNMP device
 	Port      uint16 `mapstructure:"port"`
 	Community string `mapstructure:"community"`
 }
 
+// RedisConfig contains configuration parameters for Redis connection
+// including host, port, authentication, and connection pooling settings.
 type RedisConfig struct {
 	Host               string `mapstructure:"host"`
 	Port               string `mapstructure:"port"`
@@ -61,6 +67,8 @@ type RedisConfig struct {
 	PoolTimeout        int    `mapstructure:"pool_timeout"`
 }
 
+// OltConfig contains base OID configurations for OLT device management
+// including common OIDs for ONU identification and type mapping.
 type OltConfig struct {
 	BaseOID1        string `mapstructure:"base_oid_1"`
 	BaseOID2        string `mapstructure:"base_oid_2"`
@@ -68,6 +76,8 @@ type OltConfig struct {
 	OnuTypeAllPon   string `mapstructure:"onu_type"`
 }
 
+// Board1Pon1 contains OID configurations for Board 1 Port 1 ONU management
+// including identifiers, status, power levels, and diagnostic information.
 type Board1Pon1 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -83,6 +93,7 @@ type Board1Pon1 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon2 contains OID configurations for Board 1 Port 2 ONU management.
 type Board1Pon2 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -98,6 +109,7 @@ type Board1Pon2 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon3 contains OID configurations for Board 1 Port 3 ONU management.
 type Board1Pon3 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -113,6 +125,7 @@ type Board1Pon3 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon4 contains OID configurations for Board 1 Port 4 ONU management.
 type Board1Pon4 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -128,6 +141,7 @@ type Board1Pon4 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon5 contains OID configurations for Board 1 Port 5 ONU management.
 type Board1Pon5 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -143,6 +157,7 @@ type Board1Pon5 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon6 contains OID configurations for Board 1 Port 6 ONU management.
 type Board1Pon6 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -158,6 +173,7 @@ type Board1Pon6 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon7 contains OID configurations for Board 1 Port 7 ONU management.
 type Board1Pon7 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -173,6 +189,7 @@ type Board1Pon7 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon8 contains OID configurations for Board 1 Port 8 ONU management.
 type Board1Pon8 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -188,6 +205,7 @@ type Board1Pon8 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon9 contains OID configurations for Board 1 Port 9 ONU management.
 type Board1Pon9 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -203,6 +221,7 @@ type Board1Pon9 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon10 contains OID configurations for Board 1 Port 10 ONU management.
 type Board1Pon10 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -218,6 +237,7 @@ type Board1Pon10 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon11 contains OID configurations for Board 1 Port 11 ONU management.
 type Board1Pon11 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -233,6 +253,7 @@ type Board1Pon11 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon12 contains OID configurations for Board 1 Port 12 ONU management.
 type Board1Pon12 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -248,6 +269,7 @@ type Board1Pon12 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon13 contains OID configurations for Board 1 Port 13 ONU management.
 type Board1Pon13 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -263,6 +285,7 @@ type Board1Pon13 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon14 contains OID configurations for Board 1 Port 14 ONU management.
 type Board1Pon14 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -278,6 +301,7 @@ type Board1Pon14 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon15 contains OID configurations for Board 1 Port 15 ONU management.
 type Board1Pon15 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -293,6 +317,7 @@ type Board1Pon15 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board1Pon16 contains OID configurations for Board 1 Port 16 ONU management.
 type Board1Pon16 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -307,6 +332,8 @@ type Board1Pon16 struct {
 	OnuLastOfflineReasonOID   string `mapstructure:"onu_last_offline_reason"`
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
+
+// Board2Pon1 contains OID configurations for Board 2 Port 1 ONU management.
 type Board2Pon1 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -322,6 +349,7 @@ type Board2Pon1 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon2 contains OID configurations for Board 2 Port 2 ONU management.
 type Board2Pon2 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -337,6 +365,7 @@ type Board2Pon2 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon3 contains OID configurations for Board 2 Port 3 ONU management.
 type Board2Pon3 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -352,6 +381,7 @@ type Board2Pon3 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon4 contains OID configurations for Board 2 Port 4 ONU management.
 type Board2Pon4 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -367,6 +397,7 @@ type Board2Pon4 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon5 contains OID configurations for Board 2 Port 5 ONU management.
 type Board2Pon5 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -382,6 +413,7 @@ type Board2Pon5 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon6 contains OID configurations for Board 2 Port 6 ONU management.
 type Board2Pon6 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -397,6 +429,7 @@ type Board2Pon6 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon7 contains OID configurations for Board 2 Port 7 ONU management.
 type Board2Pon7 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -412,6 +445,7 @@ type Board2Pon7 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon8 contains OID configurations for Board 2 Port 8 ONU management.
 type Board2Pon8 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -427,6 +461,7 @@ type Board2Pon8 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon9 contains OID configurations for Board 2 Port 9 ONU management.
 type Board2Pon9 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -442,6 +477,7 @@ type Board2Pon9 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon10 contains OID configurations for Board 2 Port 10 ONU management.
 type Board2Pon10 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -457,6 +493,7 @@ type Board2Pon10 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon11 contains OID configurations for Board 2 Port 11 ONU management.
 type Board2Pon11 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -472,6 +509,7 @@ type Board2Pon11 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon12 contains OID configurations for Board 2 Port 12 ONU management.
 type Board2Pon12 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -487,6 +525,7 @@ type Board2Pon12 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon13 contains OID configurations for Board 2 Port 13 ONU management.
 type Board2Pon13 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -502,6 +541,7 @@ type Board2Pon13 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon14 contains OID configurations for Board 2 Port 14 ONU management.
 type Board2Pon14 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -517,6 +557,7 @@ type Board2Pon14 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon15 contains OID configurations for Board 2 Port 15 ONU management.
 type Board2Pon15 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`
@@ -532,6 +573,7 @@ type Board2Pon15 struct {
 	OnuGponOpticalDistanceOID string `mapstructure:"onu_gpon_optical_distance"`
 }
 
+// Board2Pon16 contains OID configurations for Board 2 Port 16 ONU management.
 type Board2Pon16 struct {
 	OnuIDNameOID              string `mapstructure:"onu_id_name"`
 	OnuTypeOID                string `mapstructure:"onu_type"`

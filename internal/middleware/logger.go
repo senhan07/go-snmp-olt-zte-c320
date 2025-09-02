@@ -9,6 +9,10 @@ import (
 	"github.com/rs/zerolog"
 )
 
+// Logger is a middleware function that logs incoming HTTP requests and their details
+// using the provided zerolog.Logger instance. It captures information such as request
+// time, remote address, request path, protocol, method, user agent, response status,
+// bytes in/out, and elapsed time. It also handles panics and logs them as errors
 func Logger(logger zerolog.Logger) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
@@ -25,7 +29,7 @@ func Logger(logger zerolog.Logger) func(next http.Handler) http.Handler {
 				}
 
 				logger.Info().Fields(map[string]interface{}{
-					"time":         startTime.Format(time.RFC3339), // Format waktu RFC3339
+					"time":         startTime.Format(time.RFC3339), // Format using RFC3339
 					"remote_addr":  r.RemoteAddr,
 					"path":         r.URL.Path,
 					"proto":        r.Proto,
