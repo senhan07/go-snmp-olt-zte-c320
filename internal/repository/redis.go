@@ -3,22 +3,23 @@ package repository
 import (
 	"context"
 	"encoding/json"
+	"time"
+
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/model"
 	"github.com/pkg/errors"
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
-	"time"
 )
 
 // OnuRedisRepositoryInterface is an interface that represent the auth's repository contract
 type OnuRedisRepositoryInterface interface {
 	GetOnuIDCtx(ctx context.Context, key string) ([]model.OnuID, error)
-	SetOnuIDCtx(ctx context.Context, key string, seconds int, onuId []model.OnuID) error
+	SetOnuIDCtx(ctx context.Context, key string, seconds int, onuID []model.OnuID) error
 	DeleteOnuIDCtx(ctx context.Context, key string) error
 	SaveONUInfoList(ctx context.Context, key string, seconds int, onuInfoList []model.ONUInfoPerBoard) error
 	GetONUInfoList(ctx context.Context, key string) ([]model.ONUInfoPerBoard, error)
 	GetOnlyOnuIDCtx(ctx context.Context, key string) ([]model.OnuOnlyID, error)
-	SaveOnlyOnuIDCtx(ctx context.Context, key string, seconds int, onuId []model.OnuOnlyID) error
+	SaveOnlyOnuIDCtx(ctx context.Context, key string, seconds int, onuID []model.OnuOnlyID) error
 }
 
 // Auth redis repository
@@ -39,18 +40,18 @@ func (r *onuRedisRepo) GetOnuIDCtx(ctx context.Context, key string) ([]model.Onu
 		return nil, errors.Wrap(err, "onuRedisRepo.GetOnuIDCtx.redisClient.Get")
 	}
 
-	var onuId []model.OnuID
-	if err := json.Unmarshal(onuBytes, &onuId); err != nil {
+	var onuID []model.OnuID
+	if err := json.Unmarshal(onuBytes, &onuID); err != nil {
 		log.Error().Err(err).Msg("Failed to unmarshal onu id")
 		return nil, errors.Wrap(err, "onuRedisRepo.GetOnuIDCtx.json.Unmarshal")
 	}
 
-	return onuId, nil
+	return onuID, nil
 }
 
 // SetOnuIDCtx is a method to set onu id to redis
-func (r *onuRedisRepo) SetOnuIDCtx(ctx context.Context, key string, seconds int, onuId []model.OnuID) error {
-	onuBytes, err := json.Marshal(onuId)
+func (r *onuRedisRepo) SetOnuIDCtx(ctx context.Context, key string, seconds int, onuID []model.OnuID) error {
+	onuBytes, err := json.Marshal(onuID)
 	if err != nil {
 		log.Error().Err(err).Msg("Failed to marshal onu id")
 		return errors.Wrap(err, "setRedisRepo.SetNewsCtx.json.Marshal")
@@ -117,18 +118,18 @@ func (r *onuRedisRepo) GetOnlyOnuIDCtx(ctx context.Context, key string) ([]model
 		return nil, errors.Wrap(err, "onuRedisRepo.GetOnlyOnuIDCtx.redisClient.Get")
 	}
 
-	var onuId []model.OnuOnlyID
-	if err := json.Unmarshal(onuBytes, &onuId); err != nil {
+	var onuID []model.OnuOnlyID
+	if err := json.Unmarshal(onuBytes, &onuID); err != nil {
 		log.Error().Err(err).Msg("Failed to unmarshal onu id")
 		return nil, errors.Wrap(err, "onuRedisRepo.GetOnlyOnuIDCtx.json.Unmarshal")
 	}
 
-	return onuId, nil
+	return onuID, nil
 }
 
 // SaveOnlyOnuIDCtx is a method to save only onu id to redis
-func (r *onuRedisRepo) SaveOnlyOnuIDCtx(ctx context.Context, key string, seconds int, onuId []model.OnuOnlyID) error {
-	onuBytes, err := json.Marshal(onuId)
+func (r *onuRedisRepo) SaveOnlyOnuIDCtx(ctx context.Context, key string, seconds int, onuID []model.OnuOnlyID) error {
+	onuBytes, err := json.Marshal(onuID)
 	if err != nil {
 		log.Error().Err(err).Msg("Failed to marshal onu id")
 		return errors.Wrap(err, "onuRedisRepo.SaveOnlyOnuIDCtx.json.Marshal")

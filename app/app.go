@@ -2,6 +2,9 @@ package app
 
 import (
 	"context"
+	"net/http"
+	"os"
+
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/handler"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/repository"
@@ -12,18 +15,30 @@ import (
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/pkg/snmp"
 	rds "github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
-	"net/http"
-	"os"
 )
 
+// App represents the main application structure that holds the HTTP router
+// and manages the application lifecycle including dependencies initialization
+// and server startup.
 type App struct {
 	router http.Handler
 }
 
+// New creates and returns a new instance of the App with initialized dependencies.
+// It prepares the application for startup but does not start the server.
 func New() *App {
 	return &App{}
 }
 
+// Start initializes the application components, sets up connections to external services
+// (Redis and SNMP), and starts the HTTP server. It handles graceful shutdown on context
+// cancellation and ensures proper cleanup of resources.
+//
+// Parameters:
+//   - ctx: context.Context for cancellation and timeout propagation
+//
+// Returns:
+//   - error: returns any error that occurs during application startup or shutdown
 func (a *App) Start(ctx context.Context) error {
 
 	// Get config path from APP_ENV environment variable

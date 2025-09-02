@@ -1,10 +1,13 @@
 package middleware
 
 import (
-	"github.com/go-chi/cors"
 	"net/http"
+
+	"github.com/go-chi/cors"
 )
 
+// CorsMiddleware is a middleware function that sets up CORS (Cross-Origin Resource Sharing)
+// for the HTTP server. It allows requests from any origin and supports common HTTP methods
 func CorsMiddleware() func(next http.Handler) http.Handler {
 	return cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://*"},

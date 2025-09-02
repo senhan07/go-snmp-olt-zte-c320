@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// ExtractONUID function is used to extract ONU ID from OID string
 func ExtractONUID(oid string) string {
 	// Split the OID name and take the last component
 	parts := strings.Split(oid, ".")
@@ -19,6 +20,7 @@ func ExtractONUID(oid string) string {
 	return "" // Return an empty string if the OID is invalid or empty (default value)
 }
 
+// ExtractIDOnuID function is used to extract ONU ID from OID interface{}
 func ExtractIDOnuID(oid interface{}) int {
 	if oid == nil {
 		return 0
@@ -40,6 +42,7 @@ func ExtractIDOnuID(oid interface{}) int {
 	}
 }
 
+// ExtractName function is used to extract name from OID value
 func ExtractName(oidValue interface{}) string {
 	switch v := oidValue.(type) {
 	case string:
@@ -76,6 +79,7 @@ func ExtractSerialNumber(oidValue interface{}) string {
 	}
 }
 
+// ConvertAndMultiply function is used to convert the PDU value to string after multiplying by 0.002 and subtracting 30
 func ConvertAndMultiply(pduValue interface{}) (string, error) {
 	// Type assert pduValue to an integer type
 	intValue, ok := pduValue.(int)
@@ -95,6 +99,7 @@ func ConvertAndMultiply(pduValue interface{}) (string, error) {
 	return resultStr, nil
 }
 
+// ExtractAndGetStatus function is used to extract and get status from OID value
 func ExtractAndGetStatus(oidValue interface{}) string {
 	// Check if oidValue is not an integer
 	intValue, ok := oidValue.(int)
@@ -122,6 +127,7 @@ func ExtractAndGetStatus(oidValue interface{}) string {
 	}
 }
 
+// ExtractLastOfflineReason function is used to extract last offline reason from OID value
 func ExtractLastOfflineReason(oidValue interface{}) string {
 	// Check if oidValue is not an integer
 	intValue, ok := oidValue.(int)
@@ -161,6 +167,7 @@ func ExtractLastOfflineReason(oidValue interface{}) string {
 	}
 }
 
+// ExtractGponOpticalDistance function is used to extract GPON optical distance from OID value
 func ExtractGponOpticalDistance(oidValue interface{}) string {
 	// Check if oidValue is not an integer
 	intValue, ok := oidValue.(int)

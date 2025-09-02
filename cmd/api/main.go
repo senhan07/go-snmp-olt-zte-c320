@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/app"
 	"github.com/rs/zerolog/log"
 )

@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// Shutdown gracefully shuts down the HTTP server when the context is done or an OS signal is received.
 func Shutdown(ctx context.Context, server *http.Server) error {
 	ch := make(chan error, 1)
 

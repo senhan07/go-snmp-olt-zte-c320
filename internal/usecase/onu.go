@@ -17,6 +17,7 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
+// OnuUseCaseInterface is an interface that represent the auth's usecase contract
 type OnuUseCaseInterface interface {
 	GetByBoardIDAndPonID(ctx context.Context, boardID, ponID int) ([]model.ONUInfoPerBoard, error)
 	GetByBoardIDPonIDAndOnuID(boardID, ponID, onuID int) (model.ONUCustomerInfo, error)
@@ -28,6 +29,7 @@ type OnuUseCaseInterface interface {
 	)
 }
 
+// onuUsecase represent the auth's usecase
 type onuUsecase struct {
 	snmpRepository  repository.SnmpRepositoryInterface
 	redisRepository repository.OnuRedisRepositoryInterface
@@ -35,6 +37,7 @@ type onuUsecase struct {
 	sg              singleflight.Group
 }
 
+// NewOnuUsecase will create an object that represent the auth usecase
 func NewOnuUsecase(
 	snmpRepository repository.SnmpRepositoryInterface, redisRepository repository.OnuRedisRepositoryInterface,
 	cfg *config.Config,
@@ -791,7 +794,7 @@ func (u *onuUsecase) GetByBoardIDPonIDAndOnuID(boardID, ponID, onuID int) (
 				onuInfo.Uptime = uptime
 			}
 
-			// Get Data ONU Last Down Time Duration from SNMP Walk using getLastDownDuration method
+			// Get Data ONU Last Downtime Duration from SNMP Walk using getLastDownDuration method
 			if downtime, err := u.getLastDownDuration(onuInfo.LastOffline, onuInfo.LastOnline); err == nil {
 				onuInfo.LastDownTimeDuration = downtime
 			}
@@ -1164,7 +1167,7 @@ func (u *onuUsecase) GetByBoardIDAndPonIDWithPagination(
 		return nil, 0
 	}
 
-	// Extract the result from the simpleflight result and return it
+	// Extract the result from the simple flight result and return it
 	paginationResult := result.(model.PaginationResult)
 	return paginationResult.OnuInformationList, paginationResult.Count
 
