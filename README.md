@@ -280,5 +280,61 @@ var (
 ```
 
 
+### Prometheus Exporter
+
+This service includes a built-in Prometheus exporter to monitor the status of ONUs. The exporter automatically discovers ONUs by scanning a configurable range of boards and PON ports.
+
+**Endpoint:**
+The metrics are exposed on the `/metrics` endpoint.
+
+**Configuration:**
+The scanning range for the exporter can be configured using the following environment variables:
+
+| Variable                  | Description                               | Default |
+|---------------------------|-------------------------------------------|---------|
+| `PROMETHEUS_BOARD_MIN`    | The starting board number to scan.        | `1`     |
+| `PROMETHEUS_BOARD_MAX`    | The ending board number to scan.          | `2`     |
+| `PROMETHEUS_PON_MIN`      | The starting PON port number to scan.     | `1`     |
+| `PROMETHEUS_PON_MAX`      | The ending PON port number to scan.       | `16`    |
+
+**Example Metrics:**
+```
+# HELP zte_onu_gpon_optical_distance_meters The GPON optical distance to the ONU in meters.
+# TYPE zte_onu_gpon_optical_distance_meters gauge
+zte_onu_gpon_optical_distance_meters{board="2",onu_id="4",pon="7"} 6701
+
+# HELP zte_onu_info Information about the ZTE ONU device.
+# TYPE zte_onu_info gauge
+zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="PowerOff",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
+
+# HELP zte_onu_last_down_duration_seconds The duration of the last downtime in seconds.
+# TYPE zte_onu_last_down_duration_seconds gauge
+zte_onu_last_down_duration_seconds{board="2",onu_id="4",pon="7"} 62
+
+# HELP zte_onu_last_offline_timestamp_seconds The last offline timestamp of the ONU as a Unix epoch.
+# TYPE zte_onu_last_offline_timestamp_seconds gauge
+zte_onu_last_offline_timestamp_seconds{board="2",onu_id="4",pon="7"} 1723345715
+
+# HELP zte_onu_last_online_timestamp_seconds The last online timestamp of the ONU as a Unix epoch.
+# TYPE zte_onu_last_online_timestamp_seconds gauge
+zte_onu_last_online_timestamp_seconds{board="2",onu_id="4",pon="7"} 1723345777
+
+# HELP zte_onu_rx_power_dbm The received optical power of the ONU in dBm.
+# TYPE zte_onu_rx_power_dbm gauge
+zte_onu_rx_power_dbm{board="2",onu_id="4",pon="7"} -20.71
+
+# HELP zte_onu_status The operational status of the ONU (1 for Online, 0 for Offline).
+# TYPE zte_onu_status gauge
+zte_onu_status{board="2",onu_id="4",pon="7"} 1
+
+# HELP zte_onu_tx_power_dbm The transmitted optical power of the ONU in dBm.
+# TYPE zte_onu_tx_power_dbm gauge
+zte_onu_tx_power_dbm{board="2",onu_id="4",pon="7"} 2.57
+
+# HELP zte_onu_uptime_seconds The uptime of the ONU in seconds.
+# TYPE zte_onu_uptime_seconds gauge
+zte_onu_uptime_seconds{board="2",onu_id="4",pon="7"} 479450
+```
+
 ### LICENSE
 [MIT License](https://github.com/megadata-dev/go-snmp-olt-zte-c320/blob/main/LICENSE)

@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
+	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/exporter"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/handler"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/repository"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/usecase"
@@ -108,6 +109,10 @@ func (a *App) Start(ctx context.Context) error {
 
 	// Initialize handler
 	onuHandler := handler.NewOnuHandler(onuUsecase)
+
+	// Initialize and start the Prometheus collector
+	onuCollector := exporter.NewOnuCollector(onuUsecase)
+	onuCollector.Start(ctx)
 
 	// Initialize router
 	a.router = loadRoutes(onuHandler)
