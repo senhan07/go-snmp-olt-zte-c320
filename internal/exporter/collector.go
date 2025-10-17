@@ -87,7 +87,6 @@ func (c *OnuCollector) Start(ctx context.Context) {
 func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, ponMax int) {
 	// Reset gauges to remove old data to avoid reporting stale metrics.
 	OnuInfoGauge.Reset()
-	OnuStatusGauge.Reset()
 	OnuRxPowerGauge.Reset()
 	OnuTxPowerGauge.Reset()
 	OnuUptimeGauge.Reset()
@@ -137,19 +136,12 @@ func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, 
 					"description":    detailedOnu.Description,
 					"ip_address":     detailedOnu.IPAddress,
 					"offline_reason": detailedOnu.LastOfflineReason,
-					"phase_state":    detailedOnu.PhaseState,
+					"status":         detailedOnu.Status,
 				}
 				OnuInfoGauge.With(infoLabels).Set(1)
 
-				// Set ONU Status Gauge
-				var statusValue float64
+				// Only report power metrics if the device is Online.
 				if detailedOnu.Status == "Online" {
-					statusValue = 1
-				}
-				OnuStatusGauge.With(labels).Set(statusValue)
-
-				// Only report power metrics if the device is in a valid online state.
-				if detailedOnu.PhaseState == "ready" || detailedOnu.Status == "Online" {
 					// Set ONU Rx Power Gauge
 					if rxPower, err := strconv.ParseFloat(detailedOnu.RXPower, 64); err == nil {
 						// Filter out invalid readings
