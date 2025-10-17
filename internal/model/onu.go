@@ -9,6 +9,7 @@ type OltConfig struct {
 	OnuRxPowerOID             string
 	OnuTxPowerOID             string
 	OnuStatusOID              string
+	OnuPhaseStateOID          string
 	OnuIPAddressOID           string
 	OnuDescriptionOID         string
 	OnuLastOnlineOID          string
@@ -54,6 +55,7 @@ type ONUCustomerInfo struct {
 	LastDownTimeDuration string `json:"last_down_time_duration"`
 	LastOfflineReason    string `json:"offline_reason"`
 	GponOpticalDistance  string `json:"gpon_optical_distance"`
+	PhaseState           string `json:"phase_state"`
 }
 
 // OnuID struct is a struct that represent the ONU ID

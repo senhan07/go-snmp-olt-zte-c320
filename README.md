@@ -290,6 +290,8 @@ The metrics are exposed on the `/metrics` endpoint.
 **Configuration:**
 The scanning range for the exporter can be configured using the following environment variables:
 
+**Important Note on `phase_state`:** To get the detailed `phase_state` metric, you must find the correct SNMP OID for your ZTE C320 device and add it to your configuration file (e.g., `config/config-dev.yml`) under each `BoardXPonY` section with the key `onu_phase_state`. Without this, the `phase_state` label will report as "unknown".
+
 | Variable                  | Description                               | Default |
 |---------------------------|-------------------------------------------|---------|
 | `PROMETHEUS_BOARD_MIN`    | The starting board number to scan.        | `1`     |
@@ -305,7 +307,7 @@ zte_onu_gpon_optical_distance_meters{board="2",onu_id="4",pon="7"} 6701
 
 # HELP zte_onu_info Information about the ZTE ONU device.
 # TYPE zte_onu_info gauge
-zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="PowerOff",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
+zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="DyingGasp",phase_state="ready",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
 
 # HELP zte_onu_last_down_duration_seconds The duration of the last downtime in seconds.
 # TYPE zte_onu_last_down_duration_seconds gauge

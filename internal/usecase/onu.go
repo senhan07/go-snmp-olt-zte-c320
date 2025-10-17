@@ -85,6 +85,7 @@ func (u *onuUsecase) getBoard1Config(ponID int) *model.OltConfig {
 			OnuRxPowerOID:             u.cfg.Board1Pon1.OnuRxPowerOID,
 			OnuTxPowerOID:             u.cfg.Board1Pon1.OnuTxPowerOID,
 			OnuStatusOID:              u.cfg.Board1Pon1.OnuStatusOID,
+			OnuPhaseStateOID:          u.cfg.Board1Pon1.OnuPhaseStateOID,
 			OnuIPAddressOID:           u.cfg.Board1Pon1.OnuIPAddressOID,
 			OnuDescriptionOID:         u.cfg.Board1Pon1.OnuDescriptionOID,
 			OnuLastOnlineOID:          u.cfg.Board1Pon1.OnuLastOnlineOID,
@@ -809,6 +810,11 @@ func (u *onuUsecase) GetByBoardIDPonIDAndOnuID(boardID, ponID, onuID int) (
 				onuInfo.GponOpticalDistance = dist
 			}
 
+			// Get Data ONU Phase State from SNMP Walk using getPhaseState method
+			if phaseState, err := u.getPhaseState(oltConfig.OnuPhaseStateOID, strconv.Itoa(onuInfo.ID)); err == nil {
+				onuInfo.PhaseState = phaseState
+			}
+
 			onuInformationList = onuInfo // Append ONU information to the onuInformationList
 		}
 
@@ -1227,6 +1233,21 @@ func (u *onuUsecase) getStatus(OnuStatusOID, onuID string) (string, error) {
 		return "", err
 	}
 	return utils.ExtractAndGetStatus(result.Variables[0].Value), nil
+}
+
+func (u *onuUsecase) getPhaseState(OnuPhaseStateOID, onuID string) (string, error) {
+	oid := u.cfg.OltCfg.BaseOID1 + OnuPhaseStateOID + "." + onuID
+	result, err := u.getFromSNMPWithSingleflight(oid)
+	if err != nil {
+		// If the OID doesn't exist, we can return a default or known "unknown" state
+		// instead of an error, to avoid breaking the main data collection flow.
+		return "unknown", nil
+	}
+	// Assuming the phase state is also an integer that needs to be mapped to a string.
+	// We'll need a new utility function for this. For now, let's assume it returns a string directly.
+	// This will need a new utility function similar to ExtractAndGetStatus.
+	// For now, we'll just extract it as a string.
+	return utils.ExtractName(result.Variables[0].Value), nil
 }
 
 func (u *onuUsecase) getIPAddress(OnuIPAddressOID, onuID string) (string, error) {

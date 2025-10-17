@@ -12,7 +12,7 @@ var (
 			Name: "zte_onu_info",
 			Help: "Information about the ZTE ONU device.",
 		},
-		[]string{"board", "pon", "onu_id", "name", "serial_number", "onu_type", "description", "ip_address", "offline_reason"},
+		[]string{"board", "pon", "onu_id", "name", "serial_number", "onu_type", "description", "ip_address", "offline_reason", "phase_state"},
 	)
 
 	// OnuStatusGauge indicates the operational status of the ONU.

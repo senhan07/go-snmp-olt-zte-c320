@@ -85,6 +85,7 @@ type Board1Pon1 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -101,6 +102,7 @@ type Board1Pon2 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -117,6 +119,7 @@ type Board1Pon3 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -133,6 +136,7 @@ type Board1Pon4 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -149,6 +153,7 @@ type Board1Pon5 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -165,6 +170,7 @@ type Board1Pon6 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -181,6 +187,7 @@ type Board1Pon7 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -197,6 +204,7 @@ type Board1Pon8 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -213,6 +221,7 @@ type Board1Pon9 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -229,6 +238,7 @@ type Board1Pon10 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -245,6 +255,7 @@ type Board1Pon11 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -261,6 +272,7 @@ type Board1Pon12 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -277,6 +289,7 @@ type Board1Pon13 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -293,6 +306,7 @@ type Board1Pon14 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -309,6 +323,7 @@ type Board1Pon15 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -325,6 +340,7 @@ type Board1Pon16 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -341,6 +357,7 @@ type Board2Pon1 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -357,6 +374,7 @@ type Board2Pon2 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -373,6 +391,7 @@ type Board2Pon3 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -389,6 +408,7 @@ type Board2Pon4 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -405,6 +425,7 @@ type Board2Pon5 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -421,6 +442,7 @@ type Board2Pon6 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -437,6 +459,7 @@ type Board2Pon7 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -453,6 +476,7 @@ type Board2Pon8 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -469,6 +493,7 @@ type Board2Pon9 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -485,6 +510,7 @@ type Board2Pon10 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -501,6 +527,7 @@ type Board2Pon11 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -517,6 +544,7 @@ type Board2Pon12 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -533,6 +561,7 @@ type Board2Pon13 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -549,6 +578,7 @@ type Board2Pon14 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -565,6 +595,7 @@ type Board2Pon15 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`
@@ -581,6 +612,7 @@ type Board2Pon16 struct {
 	OnuRxPowerOID             string `mapstructure:"onu_rx_power"`
 	OnuTxPowerOID             string `mapstructure:"onu_tx_power"`
 	OnuStatusOID              string `mapstructure:"onu_status_id"`
+	OnuPhaseStateOID          string `mapstructure:"onu_phase_state"`
 	OnuIPAddressOID           string `mapstructure:"onu_ip_address"`
 	OnuDescriptionOID         string `mapstructure:"onu_description"`
 	OnuLastOnlineOID          string `mapstructure:"onu_last_online_time"`

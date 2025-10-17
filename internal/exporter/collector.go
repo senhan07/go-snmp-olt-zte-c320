@@ -137,6 +137,7 @@ func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, 
 					"description":    detailedOnu.Description,
 					"ip_address":     detailedOnu.IPAddress,
 					"offline_reason": detailedOnu.LastOfflineReason,
+					"phase_state":    detailedOnu.PhaseState,
 				}
 				OnuInfoGauge.With(infoLabels).Set(1)
 
@@ -147,18 +148,27 @@ func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, 
 				}
 				OnuStatusGauge.With(labels).Set(statusValue)
 
-				// Set ONU Rx Power Gauge
-				if rxPower, err := strconv.ParseFloat(detailedOnu.RXPower, 64); err == nil {
-					OnuRxPowerGauge.With(labels).Set(rxPower)
-				} else {
-					log.Warn().Err(err).Msg("Could not parse RxPower")
-				}
+				// Only report power metrics if the device is in a valid online state.
+				if detailedOnu.PhaseState == "ready" || detailedOnu.Status == "Online" {
+					// Set ONU Rx Power Gauge
+					if rxPower, err := strconv.ParseFloat(detailedOnu.RXPower, 64); err == nil {
+						// Filter out invalid readings
+						if rxPower < 100 {
+							OnuRxPowerGauge.With(labels).Set(rxPower)
+						}
+					} else {
+						log.Warn().Err(err).Msg("Could not parse RxPower")
+					}
 
-				// Set ONU Tx Power Gauge
-				if txPower, err := strconv.ParseFloat(detailedOnu.TXPower, 64); err == nil {
-					OnuTxPowerGauge.With(labels).Set(txPower)
-				} else {
-					log.Warn().Err(err).Msg("Could not parse TxPower")
+					// Set ONU Tx Power Gauge
+					if txPower, err := strconv.ParseFloat(detailedOnu.TXPower, 64); err == nil {
+						// Filter out invalid readings
+						if txPower < 100 {
+							OnuTxPowerGauge.With(labels).Set(txPower)
+						}
+					} else {
+						log.Warn().Err(err).Msg("Could not parse TxPower")
+					}
 				}
 
 				// Set other gauges
