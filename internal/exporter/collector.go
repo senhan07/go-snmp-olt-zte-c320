@@ -87,7 +87,6 @@ func (c *OnuCollector) Start(ctx context.Context) {
 func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, ponMax int) {
 	// Reset gauges to remove old data to avoid reporting stale metrics.
 	OnuInfoGauge.Reset()
-	OnuStatusGauge.Reset()
 	OnuRxPowerGauge.Reset()
 	OnuTxPowerGauge.Reset()
 	OnuUptimeGauge.Reset()
@@ -137,28 +136,31 @@ func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, 
 					"description":    detailedOnu.Description,
 					"ip_address":     detailedOnu.IPAddress,
 					"offline_reason": detailedOnu.LastOfflineReason,
+					"status":         detailedOnu.Status,
 				}
 				OnuInfoGauge.With(infoLabels).Set(1)
 
-				// Set ONU Status Gauge
-				var statusValue float64
+				// Only report power metrics if the device is Online.
 				if detailedOnu.Status == "Online" {
-					statusValue = 1
-				}
-				OnuStatusGauge.With(labels).Set(statusValue)
+					// Set ONU Rx Power Gauge
+					if rxPower, err := strconv.ParseFloat(detailedOnu.RXPower, 64); err == nil {
+						// Filter out invalid readings
+						if rxPower < 100 {
+							OnuRxPowerGauge.With(labels).Set(rxPower)
+						}
+					} else {
+						log.Warn().Err(err).Msg("Could not parse RxPower")
+					}
 
-				// Set ONU Rx Power Gauge
-				if rxPower, err := strconv.ParseFloat(detailedOnu.RXPower, 64); err == nil {
-					OnuRxPowerGauge.With(labels).Set(rxPower)
-				} else {
-					log.Warn().Err(err).Msg("Could not parse RxPower")
-				}
-
-				// Set ONU Tx Power Gauge
-				if txPower, err := strconv.ParseFloat(detailedOnu.TXPower, 64); err == nil {
-					OnuTxPowerGauge.With(labels).Set(txPower)
-				} else {
-					log.Warn().Err(err).Msg("Could not parse TxPower")
+					// Set ONU Tx Power Gauge
+					if txPower, err := strconv.ParseFloat(detailedOnu.TXPower, 64); err == nil {
+						// Filter out invalid readings
+						if txPower < 100 {
+							OnuTxPowerGauge.With(labels).Set(txPower)
+						}
+					} else {
+						log.Warn().Err(err).Msg("Could not parse TxPower")
+					}
 				}
 
 				// Set other gauges
