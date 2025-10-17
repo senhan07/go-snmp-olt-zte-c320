@@ -1,336 +1,85 @@
-# Monitoring OLT ZTE C320 with SNMP
-[![ci](https://github.com/Cepat-Kilat-Teknologi/go-snmp-olt-zte-c320/actions/workflows/ci.yml/badge.svg)](https://github.com/Cepat-Kilat-Teknologi/go-snmp-olt-zte-c320/actions/workflows/ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/megadata-dev/go-snmp-olt-zte-c320)](https://goreportcard.com/report/github.com/megadata-dev/go-snmp-olt-zte-c320)
+# ZTE C320 OLT SNMP Exporter for Prometheus
 
-Service for integration into the C320 OLT with the Go programming language
+This application is a dedicated Prometheus exporter that collects metrics from a ZTE C320 OLT (Optical Line Terminal) via SNMP. It discovers Optical Network Units (ONUs) across configured boards and PONs, and exposes their operational data as Prometheus metrics.
 
-#### 👨‍💻 Full list what has been used:
-* [Go](https://go.dev/) - Programming language
-* [Chi](https://github.com/go-chi/chi/) - HTTP Server
-* [GoSNMP](https://github.com/gosnmp/gosnmp) - SNMP library for Go
-* [Redis](https://github.com/redis/go-redis/v9) - Redis client for Go
-* [Zerolog](https://github.com/rs/zerolog) - Logger
-* [Viper](https://github.com/spf13/viper) - Configuration management
-* [Docker](https://www.docker.com/) - Containerization
-* [Task](https://github.com/go-task/task) - Task runner
-* [Air](https://github.com/cosmtrek/air) - Live reload for Go apps
+## Features
 
+-   **ONU Discovery**: Automatically scans a configurable range of boards and PONs to find active ONUs.
+-   **Rich Metrics**: Exposes a wide range of metrics, including signal strength (Rx/Tx power), uptime, and status.
+-   **Prometheus Integration**: Provides a standard `/metrics` endpoint for Prometheus to scrape.
+-   **Dockerized**: Comes with a `Dockerfile` for easy deployment.
 
-#### Note : This service is still in development ⚠️👨‍💻👩‍💻
+## Configuration
 
-## Getting Started 🚀
+The exporter is configured through environment variables. The following variables are available:
 
-### 👨‍💻Recommendation for local development most comfortable usage:
-
-``` shell
-task dev
-```
-
-### Docker development usage:
-```shell
-task up
-```
-
-```shell
-docker-compose -f docker-compose.local.yaml up -d && air -c .air.toml
-```
-
-### Production usage with internal redis in docker:
-```shell
-task docker-run
-```
-```shell
-docker network create local-dev && \
-docker run -d --name redis-container \
---network local-dev -p 6379:6379 redis:7.2 && \
-docker run -d -p 8081:8081 --name go-snmp-olt-zte-c320 \
---network local-dev -e REDIS_HOST=redis-container \
--e REDIS_PORT=6379 -e REDIS_DB=0 \
--e REDIS_MIN_IDLE_CONNECTIONS=200 -e REDIS_POOL_SIZE=12000 \
--e REDIS_POOL_TIMEOUT=240 -e SNMP_HOST=x.x.x.x \
--e SNMP_PORT=161 -e SNMP_COMMUNITY=xxxx \
-sumitroajiprabowo/go-snmp-olt-zte-c320:latest
-```
-
-### Production usage without external redis:
-```shell
-docker run -d -p 8081:8081 --name go-snmp-olt-zte-c320 \
--e REDIS_HOST=redis_host \
--e REDIS_PORT=redis_port \
--e REDIS_DB=redis_db \
--e REDIS_MIN_IDLE_CONNECTIONS=redis_min_idle_connection \
--e REDIS_POOL_SIZE=redis_pool_size \
--e REDIS_POOL_TIMEOUT=redis_pool_timeout \
--e SNMP_HOST=snmp_host \
--e SNMP_PORT=snmp_port \
--e SNMP_COMMUNITY=snmp_community \
-sumitroajiprabowo/go-snmp-olt-zte-c320:latest
-```
+| Environment Variable        | Description                                                                 | Default |
+| --------------------------- | --------------------------------------------------------------------------- | ------- |
+| `APP_ENV`                   | Set the application environment (`dev` or `prod`).                          | `dev`     |
+| `PROMETHEUS_BOARD_MIN`      | The starting board ID to scan for ONUs.                                     | `1`     |
+| `PROMETHEUS_BOARD_MAX`      | The ending board ID to scan for ONUs.                                       | `2`     |
+| `PROMETHEUS_PON_MIN`        | The starting PON ID to scan for ONUs.                                       | `1`     |
+| `PROMETHEUS_PON_MAX`        | The ending PON ID to scan for ONUs.                                         | `16`    |
+| `SNMP_IP`                   | The IP address of the ZTE C320 OLT.                                         |         |
+| `SNMP_PORT`                 | The SNMP port of the OLT.                                                   | `161`   |
+| `SNMP_COMMUNITY`            | The SNMP community string.                                                  |         |
+| `REDIS_HOST`                | The hostname of the Redis server.                                           |         |
+| `REDIS_PORT`                | The port of the Redis server.                                               | `6379`  |
+| `REDIS_PASSWORD`            | The password for the Redis server.                                          |         |
+| `REDIS_DB`                  | The Redis database to use.                                                  | `0`     |
 
 
-### Available tasks for this project:
+## Exposed Metrics
 
-| Syntax             | Description                                                     |
-|--------------------|-----------------------------------------------------------------|
-| init               | Initialize the environment                                      |
-| dev                | Start the local development                                     |
-| app-build          | Build the app binary                                            |
-| build-image        | Build docker image with tag latest                              |
-| push-image         | push docker image with tag latest                               |
-| pull-image         | pull docker image with tag latest                               |
-| docker-run         | Run the docker container image with tag latest                  |
-| docker-stop        | Stop the docker container                                       |
-| docker-remove      | Remove the docker container                                     |
-| up                 | Start the docker containers in the background                   |
-| up-rebuild         | Rebuild the docker containers                                   |
-| down               | Stop and remove the docker containers                           |
-| restart            | Restart the docker containers                                   |
-| rebuild            | Rebuild the docker image and up with detached mode              |
-| tidy               | Clean up dependencies                                           |
+The following Prometheus metrics are exposed on the `/metrics` endpoint:
 
-### Test with curl GET method Board 2 Pon 7
-``` shell
-curl -sS localhost:8081/api/v1/board/2/pon/7 | jq
-```
-### Result
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "data": [
-    {
-      "board": 2,
-      "pon": 7,
-      "onu_id": 3,
-      "name": "Siti Khotimah",
-      "onu_type": "F670LV7.1",
-      "serial_number": "ZTEGCE3E0FFF",
-      "rx_power": "-22.22",
-      "status": "Online"
-    },
-    {
-      "board": 2,
-      "pon": 7,
-      "onu_id": 4,
-      "name": "Isroh",
-      "onu_type": "F670LV7.1",
-      "serial_number": "ZTEGCEEA1119",
-      "rx_power": "-21.08",
-      "status": "Online"
-    },
-    {
-      "board": 2,
-      "pon": 7,
-      "onu_id": 5,
-      "name": "Hadi Susilo",
-      "onu_type": "F670LV7.1",
-      "serial_number": "ZTEGCEC3033C",
-      "rx_power": "-19.956",
-      "status": "Online"
-    }
-  ]
-}
-```
+| Metric                          | Type  | Labels                                                                                                                              | Description                                                                 |
+| ------------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `zte_onu_info`                  | Gauge | `board`, `pon`, `onu_id`, `name`, `serial_number`, `onu_type`, `description`, `ip_address`, `offline_reason`, `status`               | A constant value of `1` with labels providing detailed information about the ONU. |
+| `zte_onu_rx_power_dbm`          | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The received optical power of the ONU in dBm.                               |
+| `zte_onu_tx_power_dbm`          | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The transmitted optical power of the ONU in dBm.                            |
+| `zte_onu_uptime_seconds`        | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The uptime of the ONU in seconds.                                           |
+| `zte_onu_last_down_duration_seconds` | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The duration of the last downtime for the ONU in seconds.                   |
+| `zte_onu_last_online_timestamp` | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The timestamp of the last time the ONU was online.                          |
+| `zte_onu_last_offline_timestamp`| Gauge | `board`, `pon`, `onu_id`                                                                                                            | The timestamp of the last time the ONU was offline.                         |
+| `zte_onu_gpon_optical_distance_meters` | Gauge | `board`, `pon`, `onu_id`                                                                                                            | The optical distance of the ONU from the OLT in meters.                     |
 
-### Test with curl GET method Board 2 Pon 7 Onu 4
-```shell
- curl -sS localhost:8081/api/v1/board/2/pon/7/onu/4 | jq
-```
+**Note**: Power metrics (`zte_onu_rx_power_dbm` and `zte_onu_tx_power_dbm`) are only reported for ONUs with a status of `Online`.
 
-### Result
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "data": {
-    "board": 2,
-    "pon": 7,
-    "onu_id": 4,
-    "name": "Isroh",
-    "description": "Bale Agung",
-    "onu_type": "F670LV7.1",
-    "serial_number": "ZTEGCEEA1119",
-    "rx_power": "-20.71",
-    "tx_power": "2.57",
-    "status": "Online",
-    "ip_address": "10.90.1.214",
-    "last_online": "2024-08-11 10:09:37",
-    "last_offline": "2024-08-11 10:08:35",
-    "uptime": "5 days 13 hours 10 minutes 50 seconds",
-    "last_down_time_duration": "0 days 0 hours 1 minutes 2 seconds",
-    "offline_reason": "PowerOff",
-    "gpon_optical_distance": "6701"
-  }
-}
-```
+## How to Run
 
-### Test with curl GET method Get Empty ONU_ID in Board 2 Pon 5
-```shell
-curl -sS localhost:8081/api/v1/board/2/pon/5/onu_id/empty | jq
-```
+### Using Docker
 
-### Result
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "data": [
-    {
-      "board": 2,
-      "pon": 5,
-      "onu_id": 123
-    },
-    {
-      "board": 2,
-      "pon": 5,
-      "onu_id": 124
-    },
-    {
-      "board": 2,
-      "pon": 5,
-      "onu_id": 125
-    },
-    {
-      "board": 2,
-      "pon": 5,
-      "onu_id": 126
-    }
-  ]
-}
-```
+The recommended way to run the exporter is with Docker. A `Dockerfile` is provided to build the image.
 
-### Test with curl GET method Get Empty ONU_ID After Add ONU in Board 2 Pon 5
-```shell
-curl -sS localhost:8081/api/v1/board/2/pon/5/onu_id/update | jq
-```
+1.  **Build the Docker image:**
 
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "data": "Success Update Empty ONU_ID"
-}
-```
+    ```sh
+    docker build -t zte-olt-exporter .
+    ```
 
-### Test with curl GET method Get Onu Information in Board 2 Pon 8 with paginate
-```shell
-curl -sS 'http://localhost:8081/api/v1/paginate/board/2/pon/8?limit=3&page=2' | jq
-```
-### Result
-```json
-{
-  "code": 200,
-  "status": "OK",
-  "page": 2,
-  "limit": 3,
-  "page_count": 23,
-  "total_rows": 69,
-  "data": [
-    {
-      "board": 2,
-      "pon": 8,
-      "onu_id": 4,
-      "name": "Arif Irwan Setiawan",
-      "onu_type": "F670LV7.1",
-      "serial_number": "ZTEGC5A27AE1",
-      "rx_power": "-19.17",
-      "status": "Online"
-    },
-    {
-      "board": 2,
-      "pon": 8,
-      "onu_id": 5,
-      "name": "Putra Chandra Agusta",
-      "onu_type": "F660V6.0",
-      "serial_number": "ZTEGD00E4BCC",
-      "rx_power": "-19.54",
-      "status": "Online"
-    },
-    {
-      "board": 2,
-      "pon": 8,
-      "onu_id": 6,
-      "name": "Tarjito",
-      "onu_type": "F670LV7.1",
-      "serial_number": "ZTEGC5A062E0",
-      "rx_power": "-21.81",
-      "status": "Online"
-    }
-  ]
-}
-```
+2.  **Run the Docker container:**
 
-### Description of Paginate
-| Syntax             | Description                                                     |
-|--------------------|-----------------------------------------------------------------|
-| page               | Page number                                                     |
-| limit              | Limit data per page                                             |
-| page_count         | Total page                                                      |
-| total_rows         | Total rows                                                      |
-| data               | Data of onu                                                     |
+    Replace the placeholder values with your OLT and Redis connection details.
 
-#### Default paginate
-``` go
-var (
-	DefaultPageSize = 10 // default page size
-	MaxPageSize     = 100 // max page size
-	PageVar         = "page"
-	PageSizeVar     = "limit"
-)
-```
+    ```sh
+    docker run -d \
+      -p 8081:8081 \
+      --name zte-olt-exporter \
+      -e APP_ENV=prod \
+      -e SNMP_IP=<your_olt_ip> \
+      -e SNMP_COMMUNITY=<your_snmp_community> \
+      -e REDIS_HOST=<your_redis_host> \
+      -e REDIS_PASSWORD=<your_redis_password> \
+      zte-olt-exporter
+    ```
 
+3.  **Verify the exporter is running:**
 
-### Prometheus Exporter
+    You can check the logs of the container to ensure it started correctly:
 
-This service includes a built-in Prometheus exporter to monitor the status of ONUs. The exporter automatically discovers ONUs by scanning a configurable range of boards and PON ports.
+    ```sh
+    docker logs zte-olt-exporter
+    ```
 
-**Endpoint:**
-The metrics are exposed on the `/metrics` endpoint.
-
-**Configuration:**
-The scanning range for the exporter can be configured using the following environment variables:
-
-| Variable                  | Description                               | Default |
-|---------------------------|-------------------------------------------|---------|
-| `PROMETHEUS_BOARD_MIN`    | The starting board number to scan.        | `1`     |
-| `PROMETHEUS_BOARD_MAX`    | The ending board number to scan.          | `2`     |
-| `PROMETHEUS_PON_MIN`      | The starting PON port number to scan.     | `1`     |
-| `PROMETHEUS_PON_MAX`      | The ending PON port number to scan.       | `16`    |
-
-**Example Metrics:**
-```
-# HELP zte_onu_gpon_optical_distance_meters The GPON optical distance to the ONU in meters.
-# TYPE zte_onu_gpon_optical_distance_meters gauge
-zte_onu_gpon_optical_distance_meters{board="2",onu_id="4",pon="7"} 6701
-
-# HELP zte_onu_info Information about the ZTE ONU device.
-# TYPE zte_onu_info gauge
-zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="PowerOff",status="Dying Gasp",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
-
-# HELP zte_onu_last_down_duration_seconds The duration of the last downtime in seconds.
-# TYPE zte_onu_last_down_duration_seconds gauge
-zte_onu_last_down_duration_seconds{board="2",onu_id="4",pon="7"} 62
-
-# HELP zte_onu_last_offline_timestamp_seconds The last offline timestamp of the ONU as a Unix epoch.
-# TYPE zte_onu_last_offline_timestamp_seconds gauge
-zte_onu_last_offline_timestamp_seconds{board="2",onu_id="4",pon="7"} 1723345715
-
-# HELP zte_onu_last_online_timestamp_seconds The last online timestamp of the ONU as a Unix epoch.
-# TYPE zte_onu_last_online_timestamp_seconds gauge
-zte_onu_last_online_timestamp_seconds{board="2",onu_id="4",pon="7"} 1723345777
-
-# HELP zte_onu_rx_power_dbm The received optical power of the ONU in dBm.
-# TYPE zte_onu_rx_power_dbm gauge
-zte_onu_rx_power_dbm{board="2",onu_id="4",pon="7"} -20.71
-
-# HELP zte_onu_tx_power_dbm The transmitted optical power of the ONU in dBm.
-# TYPE zte_onu_tx_power_dbm gauge
-zte_onu_tx_power_dbm{board="2",onu_id="4",pon="7"} 2.57
-
-# HELP zte_onu_uptime_seconds The uptime of the ONU in seconds.
-# TYPE zte_onu_uptime_seconds gauge
-zte_onu_uptime_seconds{board="2",onu_id="4",pon="7"} 479450
-```
-
-### LICENSE
-[MIT License](https://github.com/megadata-dev/go-snmp-olt-zte-c320/blob/main/LICENSE)
+    You should also be able to access the metrics at `http://localhost:8081/metrics`.

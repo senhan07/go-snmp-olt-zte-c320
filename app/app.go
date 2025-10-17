@@ -7,7 +7,6 @@ import (
 
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/config"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/exporter"
-	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/handler"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/repository"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/usecase"
 	"github.com/megadata-dev/go-snmp-olt-zte-c320/internal/utils"
@@ -77,16 +76,6 @@ func (a *App) Start(ctx context.Context) error {
 	}
 
 	// Check SNMP connection
-	/*
-		if SNMP Connection with wrong credentials in SNMP v3, return error is nil
-		if SNMP Connection with wrong Port in SNMP v2 v2c, return error is nil
-		if SNMP Connection with wrong community v2 v2c, return error is nil
-
-		Connect creates and opens a socket. Because UDP is a connectionless protocol,
-		you won't know if the remote host is responding until you send packets.
-		Neither will you know if the host is regularly disappearing and reappearing.
-	*/
-
 	if snmpConn.Connect() != nil {
 		log.Error().Err(err).Msg("Failed to connect to SNMP server")
 	} else {
@@ -107,15 +96,12 @@ func (a *App) Start(ctx context.Context) error {
 	// Initialize usecase
 	onuUsecase := usecase.NewOnuUsecase(snmpRepo, redisRepo, cfg)
 
-	// Initialize handler
-	onuHandler := handler.NewOnuHandler(onuUsecase)
-
 	// Initialize and start the Prometheus collector
 	onuCollector := exporter.NewOnuCollector(onuUsecase)
 	onuCollector.Start(ctx)
 
 	// Initialize router
-	a.router = loadRoutes(onuHandler)
+	a.router = loadRoutes()
 
 	// Start server
 	addr := "8081"
