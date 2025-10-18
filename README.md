@@ -305,7 +305,11 @@ zte_onu_gpon_optical_distance_meters{board="2",onu_id="4",pon="7"} 6701
 
 # HELP zte_onu_info Information about the ZTE ONU device.
 # TYPE zte_onu_info gauge
-zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="PowerOff",status="Dying Gasp",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
+zte_onu_info{board="2",description="Bale Agung",ip_address="10.90.1.214",name="Isroh",offline_reason="PowerOff",onu_id="4",onu_type="F670LV7.1",pon="7",serial_number="ZTEGCEEA1119"} 1
+
+# HELP zte_onu_status The operational status of the ONU (1=Online, 2=DyingGasp, 3=LOS, 4=PowerOff, 0=Other).
+# TYPE zte_onu_status gauge
+zte_onu_status{board="2",onu_id="4",pon="7"} 2
 
 # HELP zte_onu_last_down_duration_seconds The duration of the last downtime in seconds.
 # TYPE zte_onu_last_down_duration_seconds gauge

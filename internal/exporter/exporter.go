@@ -12,7 +12,16 @@ var (
 			Name: "zte_onu_info",
 			Help: "Information about the ZTE ONU device.",
 		},
-		[]string{"board", "pon", "onu_id", "name", "serial_number", "onu_type", "description", "ip_address", "offline_reason", "status"},
+		[]string{"board", "pon", "onu_id", "name", "serial_number", "onu_type", "description", "ip_address", "offline_reason"},
+	)
+
+	// OnuStatusGauge indicates the operational status of the ONU.
+	OnuStatusGauge = promauto.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name: "zte_onu_status",
+			Help: "The operational status of the ONU (1=Online, 2=DyingGasp, 3=LOS, 4=PowerOff, 0=Other).",
+		},
+		[]string{"board", "pon", "onu_id"},
 	)
 
 	// OnuRxPowerGauge shows the received optical power of the ONU.

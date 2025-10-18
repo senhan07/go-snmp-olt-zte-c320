@@ -29,6 +29,22 @@ func parseDurationStringToSeconds(durationStr string) float64 {
 	return float64(totalSeconds)
 }
 
+// mapStatusToValue converts a status string to a numeric value for Prometheus.
+func mapStatusToValue(status string) float64 {
+	switch status {
+	case "Online":
+		return 1
+	case "Dying Gasp":
+		return 2
+	case "LOS":
+		return 3
+	case "PowerOff":
+		return 4
+	default:
+		return 0 // Unknown or other offline states
+	}
+}
+
 // parseTimestampStringToEpoch converts a timestamp string (YYYY-MM-DD HH:MM:SS) to a Unix epoch.
 func parseTimestampStringToEpoch(timestampStr string) float64 {
 	layout := "2006-01-02 15:04:05"
@@ -136,9 +152,11 @@ func (c *OnuCollector) collect(ctx context.Context, boardMin, boardMax, ponMin, 
 					"description":    detailedOnu.Description,
 					"ip_address":     detailedOnu.IPAddress,
 					"offline_reason": detailedOnu.LastOfflineReason,
-					"status":         detailedOnu.Status,
 				}
 				OnuInfoGauge.With(infoLabels).Set(1)
+
+				// Set ONU Status Gauge
+				OnuStatusGauge.With(labels).Set(mapStatusToValue(detailedOnu.Status))
 
 				// Only report power metrics if the device is Online.
 				if detailedOnu.Status == "Online" {
